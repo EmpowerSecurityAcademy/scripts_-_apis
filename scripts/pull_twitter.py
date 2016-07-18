@@ -1,5 +1,7 @@
 import tweepy
 import pymongo
+import sys
+sys.path.append('../')
 from import_config import load_config
 from pymongo import MongoClient
 
