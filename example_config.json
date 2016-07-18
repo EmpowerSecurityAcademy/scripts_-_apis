@@ -3,5 +3,11 @@
 		"user_name": "admin",
 		"password": "password",
 		"connection_url": "res-api.sdfsdfsd.us-west-2.rds.amazonaws.com:3306"
+	},
+	"api": {
+		"consumer_key": "asfadsfwer234234sfsv",
+		"consumer_secret": "adsf24r234wewer23423wefwe2342wer",
+		"access_token": "adfsf2r2f",
+		"access_token_secret": "asdf23rfsdf22fsdf21"
 	}
 }
