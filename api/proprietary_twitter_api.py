@@ -14,7 +14,7 @@ client = MongoClient(config["database"]["connection_url"])
 db = client[config['database']['database_name']]
 basic_api.conn = db[config['database']['collection_name']]
 
-url_root = '/todo/api/v2.0/'
+url_root = '/tweets/api/v2.0/'
 
 def format_json(element):
 	converted = dumps(element)
@@ -27,14 +27,14 @@ def format_json(element):
 	new_task["location"] = modified["location"]
 	return new_task
 
-@basic_api.route(url_root+'tasks', methods=['GET', 'POST', 'PUT'])
+@basic_api.route(url_root+'tweets', methods=['GET', 'POST', 'PUT'])
 def do_tasks():
 	if request.method == 'GET':
 		data = basic_api.conn.find()
 		response = []
 		for element in data:
 			response.append(format_json(element))
-		return make_response(jsonify({'tasks':response}), 200)
+		return make_response(jsonify({'tweets':response}), 200)
 
 	if request.method == 'POST':
 		content = request.get_json(silent=True)
@@ -45,11 +45,11 @@ def do_tasks():
 
 # RESTFUL operations related to a specific task
 
-@basic_api.route(url_root+'tasks/<task_id>', methods=['GET', 'PUT', 'DELETE'])
+@basic_api.route(url_root+'tweets/<tweet_id>', methods=['GET', 'PUT', 'DELETE'])
 def do_task(task_id):
 	if request.method == 'GET':
 		data = basic_api.conn.find_one({"_id": ObjectId(task_id)})
-		return make_response(jsonify({'task':format_json(data)}), 200)
+		return make_response(jsonify({'tweet':format_json(data)}), 200)
 
 	if request.method == 'PUT':
 		content = request.get_json(silent=True)
