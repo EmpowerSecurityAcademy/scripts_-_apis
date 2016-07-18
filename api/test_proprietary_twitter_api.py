@@ -1,5 +1,7 @@
 import unittest
 import app
+import sys
+sys.path.append('../')
 from import_config import load_config
 import json 
 from pymongo import MongoClient
