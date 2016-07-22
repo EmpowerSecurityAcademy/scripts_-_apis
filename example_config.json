@@ -18,5 +18,8 @@
 		"consumer_secret": "adsf24r234wewer23423wefwe2342wer",
 		"access_key": "adfsf2r2f",
 		"access_secret": "asdf23rfsdf22fsdf21"
+	},
+	"google": {
+		"credentials": "blablabla"
 	}
 }

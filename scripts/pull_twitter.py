@@ -25,6 +25,7 @@ def get_tweets():
 		extracted_data = {}
 		extracted_data["type"] = "original"
 		extracted_data["processed"] = "false"
+		extracted_data["translated"] = "false"
 		extracted_data["twitter_id"] = tweet.id_str
 		extracted_data["created_at"] = tweet.created_at
 		extracted_data["text"] = tweet.text.encode("utf-8")
