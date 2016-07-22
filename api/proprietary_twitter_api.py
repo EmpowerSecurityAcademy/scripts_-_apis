@@ -1,5 +1,7 @@
 import json
 import pymongo
+import sys
+sys.path.append('../')
 from import_config import load_config
 from pymongo import MongoClient
 from flask import Flask, jsonify, request, make_response, g
