@@ -23,7 +23,6 @@ def process_tweets():
 			tweet["processed_text"] = nltk.word_tokenize(tweet["text"])
 			tweet["parts_of_speech"] = nltk.pos_tag(tweet["processed_text"])
 			tweet["processed"] = "true"
-			print(tweet)
 			conn.save(tweet)
 
 
