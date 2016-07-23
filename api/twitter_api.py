@@ -23,10 +23,7 @@ def format_json(element):
 	modified = json.loads(converted)
 	new_task = {}
 	new_task["id"] = str(modified["_id"]['$oid'])
-	new_task["description"] = modified["description"]
-	new_task["title"] = modified["title"]
-	new_task["done"] = modified["done"]
-	new_task["location"] = modified["location"]
+	new_task["text"] = modified["text"]
 	return new_task
 
 @basic_api.route(url_root+'tweets', methods=['GET', 'POST', 'PUT'])
@@ -38,13 +35,6 @@ def do_tasks():
 			response.append(format_json(element))
 		return make_response(jsonify({'tweets':response}), 200)
 
-	if request.method == 'POST':
-		content = request.get_json(silent=True)
-		result = basic_api.conn.insert_one(content)
-		return jsonify({'id': str(result.inserted_id)})
-
-	return make_response(jsonify({'status_code': 500}), 500)
-
 # RESTFUL operations related to a specific task
 
 @basic_api.route(url_root+'tweets/<tweet_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -53,20 +43,6 @@ def do_task(task_id):
 		data = basic_api.conn.find_one({"_id": ObjectId(task_id)})
 		return make_response(jsonify({'tweet':format_json(data)}), 200)
 
-	if request.method == 'PUT':
-		content = request.get_json(silent=True)
-		result = basic_api.conn.update_one(
-			{"_id": ObjectId(task_id)},
-			{"$set": {"title": content["title"], 
-						"description": content["description"], 
-						"done": content["done"]}}
-		)
-		data = basic_api.conn.find_one({"_id": ObjectId(task_id)})
-		return make_response(jsonify({'task':format_json(data)}), 200)
-
-	if request.method == 'DELETE':
-		result = basic_api.conn.delete_one({"_id": task_id})
-		return make_response(jsonify({'deleted_id': task_id}), 200)
 
 	return make_response(jsonify({'status_code': 500}), 500)
 
