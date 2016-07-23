@@ -16,7 +16,7 @@ db = client[config['database']['database_name']]
 conn = db[config['database']['collection_name']]
 
 
-def process_tweets():
+def translate_tweets():
 
 	cursor = conn.find()
 
@@ -25,9 +25,10 @@ def process_tweets():
 			r = requests.get('https://www.googleapis.com/language/translate/v2?key=' + config["google"]["credentials"] + "&source=en&target=de&q=" + tweet["text"])
 			converted = r.json()
 			tweet["german_translation"] = converted["data"]["translations"][0]["translatedText"]
+			tweet["translated"] = "true"
 			conn.save(tweet)
 
 
 
 if __name__ == '__main__':
-	process_tweets()
+	translate_tweets()
