@@ -24,9 +24,10 @@ def format_json(element):
 	new_task = {}
 	new_task["id"] = str(modified["_id"]['$oid'])
 	new_task["text"] = modified["text"]
+	new_task["german_translation"] = modified["german_translation"]
 	return new_task
 
-@basic_api.route(url_root+'tweets', methods=['GET', 'POST', 'PUT'])
+@basic_api.route(url_root+'tweets', methods=['GET'])
 def do_tasks():
 	if request.method == 'GET':
 		data = basic_api.conn.find()
@@ -37,7 +38,7 @@ def do_tasks():
 
 # RESTFUL operations related to a specific task
 
-@basic_api.route(url_root+'tweets/<tweet_id>', methods=['GET', 'PUT', 'DELETE'])
+@basic_api.route(url_root+'tweets/<tweet_id>', methods=['GET'])
 def do_task(task_id):
 	if request.method == 'GET':
 		data = basic_api.conn.find_one({"_id": ObjectId(task_id)})
