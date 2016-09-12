@@ -18,11 +18,11 @@ def write_tweets_to_csv():
 
 	cursor = conn.find()
 	file = unicodecsv.writer(open("../tmp/data.csv", "wb"))
-	file.writerow(["german_translation"])
+	file.writerow(["spanish_translation"])
 
 	for tweet in cursor:
-		print(tweet["german_translation"])
-		file.writerow([tweet["german_translation"]])
+		if tweet["spanish_translation"]:
+			file.writerow([tweet["spanish_translation"]])
 
 
 if __name__ == '__main__':

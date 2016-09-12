@@ -24,7 +24,7 @@ def process_tweets():
 			tweet["parts_of_speech"] = nltk.pos_tag(tweet["processed_text"])
 			tweet["processed"] = "true"
 			conn.save(tweet)
-
+			print(tweet)
 
 
 if __name__ == '__main__':
